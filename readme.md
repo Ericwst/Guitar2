@@ -10,10 +10,11 @@ Object-Oriented Analysis &amp; Design
 
 图片说明
 访问首页：http://localhost:8080/Guitar2/GuitarAction
-![alt text](https://raw.githubusercontent.com/Ericwst/guitar/39d981ef382b3f7bfb9f7f92e6209ea2f8287a93/1.jpg "title")
 对象测试结果
-![alt text](https://raw.githubusercontent.com/Ericwst/guitar/39d981ef382b3f7bfb9f7f92e6209ea2f8287a93/2.jpg "title")
+![alt text](https://github.com/Ericwst/Guitar2/blob/master/1.jpg "title")
+
 添加查询条件进行查找
+![alt text](https://github.com/Ericwst/Guitar2/blob/master/2.jpg "title")
 
 
 --------------
