@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.util.*"%>
-<%@page import="domain.GuitarForm"%>
+<%@page import="model.Guitar"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
 <head>
@@ -33,7 +33,7 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/premium.css">
 </head>
 <%
-	GuitarForm form = (GuitarForm) session.getAttribute("guitar");
+	Guitar form = (Guitar) session.getAttribute("guitar");
 %>
 <body class=" theme-blue">
 	<script type="text/javascript">

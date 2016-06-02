@@ -1,20 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.util.*"%>
-<%@page import="domain.GuitarForm"%>
-<%
-	List list = (List) request.getAttribute("list");
-	int number = Integer.parseInt((String) request.getAttribute("number"));
-	int maxPage = Integer.parseInt((String) request.getAttribute("maxPage"));
-	int pageNumber = Integer.parseInt((String) request.getAttribute("pageNumber"));
-	int start = number * 12;//
-	int over = (number + 1) * 12;//
-	int count = pageNumber - over;//
-	if (count <= 0) {
-		over = pageNumber;
-	}
-%>
+<%@page import="model.Guitar"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="zh-CN">
 <head>
@@ -38,9 +28,7 @@
 <link rel="stylesheet" type="text/css" href="stylesheets/theme.css">
 <link rel="stylesheet" type="text/css" href="stylesheets/premium.css">
 </head>
-<%
-	GuitarForm form = (GuitarForm) session.getAttribute("guitar");
-%>
+
 <body class=" theme-blue">
 
 	<!-- Demo page code -->
@@ -136,96 +124,47 @@
 
 
 			<!-- 搜索条件 -->
-			<form action="guitarAction.do?action=1" method="post" name="form">
-				<table>
-					<tr>
-						<td width="8%">serialNumber</td>
-						<td>price</td>
-						<td>builder</td>
-						<td>model</td>
-						<td>type</td>
-						<td>topWood</td>
-						<td>backWood</td>
-					</tr>
-					<tr>
-						<td>
-							<div class="input-group search pull-right hidden-sm hidden-xs">
-								<div class="input-group">
-									<span class="input-group-btn"><input type="text"
-										name="serialNumber" class="form-control"></span>
+			<div>
+				<form action="GuitarAction" method="post">
+					<label>Builder:</label> <select name="builder">
+						<option value=""></option>
+						<option value="FENDER">Fender</option>
+						<option value="MARTIN">Martin</option>
+						<option value="GIBSON">Gibson</option>
+						<option value="COLLINGS">Collings</option>
+						<option value="OLSON">Olson</option>
+						<option value="RYAN">Ryan</option>
+						<option value="PRS">Prs</option>
+					</select> <label>Type:</label> <select name="type">
+						<option value=""></option>
+						<option value="ACOUSTIC">Acoustic</option>
+						<option value="ELECTRIC">Electric</option>
+					</select> <label>BackWood:</label> <select name="backwood">
+						<option value=""></option>
+						<option value="INDIAN_ROSEWOOD">Indian_Rosewood</option>
+						<option value="BRAZILIAN_ROSEWOOD">Brazilian_Rosewood</option>
+						<option value="MAHOGANY">Mahogany</option>
+						<option value="MAPLE">Maple</option>
+						<option value="COCOBOLO">Cocobolo</option>
+						<option value="CEDAR">Cedar</option>
+						<option value="ADIRONDACK">Adirondack</option>
+						<option value="ALDER">Alder</option>
+						<option value="SITKA">Sitka</option>
+					</select> <label>TopWood:</label> <select name="topwood">
+						<option value=""></option>
+						<option value="INDIAN_ROSEWOOD">Indian_Rosewood</option>
+						<option value="BRAZILIAN_ROSEWOOD">Brazilian_Rosewood</option>
+						<option value="MAHOGANY">Mahogany</option>
+						<option value="MAPLE">Maple</option>
+						<option value="COCOBOLO">Cocobolo</option>
+						<option value="CEDAR">Cedar</option>
+						<option value="ADIRONDACK">Adirondack</option>
+						<option value="ALDER">Alder</option>
+						<option value="SITKA">Sitka</option>
+					</select> <input type="submit" name="search" value="Search" />
+				</form>
+			</div>
 
-
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="input-group search pull-right hidden-sm hidden-xs">
-								<div class="input-group">
-									<span class="input-group-btn"><input type="text"
-										name="price" class="form-control"> </span>
-
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="input-group search pull-right hidden-sm hidden-xs">
-								<div class="input-group">
-									<span class="input-group-btn"><input type="text"
-										name="builder" class="form-control"> </span>
-
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="input-group search pull-right hidden-sm hidden-xs">
-								<div class="input-group">
-									<span class="input-group-btn"><input type="text"
-										name="model" class="form-control"> </span>
-
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="input-group search pull-right hidden-sm hidden-xs">
-								<div class="input-group">
-									<span class="input-group-btn"><input type="text"
-										name="type" class="form-control"> </span>
-
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="input-group search pull-right hidden-sm hidden-xs">
-								<div class="input-group">
-									<span class="input-group-btn"><input type="text"
-										name="topWood" class="form-control"> </span>
-
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="input-group search pull-right hidden-sm hidden-xs">
-								<div class="input-group">
-									<span class="input-group-btn"><input type="text"
-										name="backWood" class="form-control"> </span>
-
-
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="input-group search pull-right hidden-sm hidden-xs">
-								<div class="input-group">
-									<button class="btn btn-primary" type="submit">
-										<i class="fa fa-search "></i>
-									</button>
-
-								</div>
-							</div>
-						</td>
-					</tr>
-				</table>
-			</form>
 
 			<div class="btn-group"></div>
 			<table class="table">
@@ -238,94 +177,28 @@
 						<th>类型</th>
 						<th>正面</th>
 						<th>反面</th>
+						<th>序号</th>
 						<th style="width: 3.5em;"></th>
 
 					</tr>
 				</thead>
 				<tbody>
-					<%
-						for (int i = start; i < over; i++) {
-							GuitarForm guitarForm = (GuitarForm) list.get(i);
-					%>
+	 	<c:forEach var="matchingGuitar" items="${requestScope.matchingGuitar}"> 
 					<tr bgcolor="#FFFFFF">
-						<td height="30"><div align="center"><%=guitarForm.getSerialNumber()%></div></td>
-						<td><div align="center"><%=guitarForm.getPrice()%></div></td>
-						<td><div align="center"><%=guitarForm.getBuilder()%></div></td>
-						<td><div align="center"><%=guitarForm.getModel()%></div></td>
-						<td><div align="center"><%=guitarForm.getType()%></div></td>
-						<td><div align="center"><%=guitarForm.getTopWood()%></div></td>
-						<td><div align="center"><%=guitarForm.getBackWood()%></div></td>
-						<td><div align="center">
-								<a
-									href="guitarAction.do?action=3&serialNumber=<%=guitarForm.getSerialNumber()%>">删除</a>
-							</div></td>
-						<%
-							}
-						%>
+						<td height="30"><div align="center">${matchingGuitar.serialNumber}</div></td>
+						<td><div align="center">${matchingGuitar.price}</div></td>
+						<td><div align="center">${matchingGuitar.spec.builder}</div></td>
+						<td><div align="center">${matchingGuitar.model}</div></td>
+						<td><div align="center">${matchingGuitar.spec.type}</div></td>
+						<td><div align="center">${matchingGuitar.spec.topWood}</div></td>
+						<td><div align="center">${matchingGuitar.spec.backWood}</div></td>
+						<td><div align="center">${matchingGuitar.numStrings}</div></td>
 					</tr>
+	 	</c:forEach>
 				</tbody>
 			</table>
 
-			<div id="div3">
-				<table width="90%" border="0" align="center" cellpadding="0"
-					cellspacing="0">
-					<tr align="center">
-						<td width="13%">共<%=maxPage%>页
-						</td>
-						<td width="16%">共<%=pageNumber%>条记录
-						</td>
-						<td width="14%">当前第<%=number + 1%>页
-						</td>
-						<td width="19%">
-							<%
-								if ((number + 1) == 1) {
-							%> 上一页 <%
-								} else {
-							%> <a href="guitarAction.do?action=1&i=<%=number - 1%>">上一页</a>
-						</td>
-						<%
-							}
-						%>
-						<td width="18%">
-							<%
-								if (maxPage <= (number + 1)) {
-							%> 下一页 <%
-								} else {
-							%> <a href="guitarAction.do?action=1&i=<%=number + 1%>">下一页</a>
-						</td>
-						<%
-							}
-						%>
 
-
-					</tr>
-				</table>
-			</div>
-
-			<%-- 			<div class="modal small fade" id="myModal" tabindex="-1"
-				role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">×</button>
-							<h3 id="myModalLabel">Delete Confirmation</h3>
-						</div>
-						<div class="modal-body">
-							<p class="error-text">
-								<i class="fa fa-warning modal-icon"></i>Are you sure you want to
-								delete the user?<br>This cannot be undone.
-							</p>
-						</div>
-						<div class="modal-footer">
-							<button class="btn btn-default" data-dismiss="modal"
-								aria-hidden="true">Cancel</button>
-								<% %>
-							<button href="deletedata?userId=<%=request.getParameter("userId")%>" class="btn btn-danger" data-dismiss="modal">Delete</button>
-						</div>
-					</div>
-				</div>
-			</div> --%>
 
 
 			<!-- 页面底部 -->

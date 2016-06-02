@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.util.*"%>
-<%@page import="domain.GuitarForm"%>
+<%@page import="model.Guitar"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -102,7 +102,7 @@
 			<h1 class="page-title">编辑吉他信息</h1>
 			<ul class="breadcrumb">
 				<li><a href="index.jsp">首页</a></li>
-				<li><a href="guitarAction.do?action=1">吉他</a></li>
+				<li><a href="guitarAction">吉他</a></li>
 				<li class="active">吉他添加</li>
 			</ul>
 

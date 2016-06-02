@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="domain.GuitarForm"%>
+<%@page import="model.Guitar"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!--顶部导航栏 -->
 <%
-GuitarForm form = (GuitarForm) session.getAttribute("guitar");
+Guitar form = (Guitar) session.getAttribute("guitar");
 %>
 <div class="navbar navbar-default" role="navigation">
 	<div class="navbar-header">

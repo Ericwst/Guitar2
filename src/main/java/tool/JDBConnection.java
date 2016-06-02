@@ -1,21 +1,23 @@
 package tool;
 
 import java.sql.*;
+import java.io.*;
 
-public class JDBConnection {
-	private String dbDriver = "org.sqlite.JDBC"; // 连接驱动
-	private static final String FILENAME = "F:/sqlitestudio/guitar";
-//	private String url = "jdbc:odbc:guitar";  // URL数据库地址ַ
-
+public class JDBConnection implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public Connection connection = null;
-
-	public JDBConnection() {
+	private static final String FILENAME = "F:/sqlitestudio/guitar";	
+	public JDBConnection(){
 		try {
-			Class.forName(dbDriver).newInstance(); // 建立实例
-			connection = DriverManager.getConnection("jdbc:sqlite:"+FILENAME); // 账户信息
-		} catch (Exception ex) {
-			System.out.println("连接失败");
+			Class.forName("org.sqlite.JDBC");
+			connection= DriverManager.getConnection("jdbc:sqlite:"+FILENAME);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		System.out.println("连接成功");
 	}
+
 }
